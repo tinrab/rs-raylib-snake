@@ -5,16 +5,17 @@ use rs_raylib_snake::{
     input::Input,
     math::Vector2i,
     raylib::{self, Color},
+    window::Window,
 };
 
 const SCREEN_WIDTH: i32 = 600;
 const SCREEN_HEIGHT: i32 = 600;
-const GRID_SIZE: i32 = 30;
+const GRID_SIZE: i32 = 40;
 
 fn main() -> Result<(), Box<dyn Error>> {
     println!("Hello, Snake!");
 
-    raylib::init_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Rust Raylib Snake");
+    let window = Window::new(SCREEN_WIDTH, SCREEN_HEIGHT, "Rust Raylib Snake");
 
     let mut game = Game::new(Vector2i::new(SCREEN_WIDTH, SCREEN_HEIGHT) / GRID_SIZE);
 
@@ -27,7 +28,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let mut game_over_countdown = 5.0f32;
 
-    while !raylib::window_should_close() {
+    while !window.should_close() {
         if !game.game_over {
             Input::update();
 
@@ -85,8 +86,6 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         raylib::end_drawing();
     }
-
-    raylib::close_window();
 
     Ok(())
 }

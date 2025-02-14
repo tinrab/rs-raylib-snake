@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "rs-raylib-snake"
+name = "snake"
 path = "src/main.rs"
 
 [build-dependencies]

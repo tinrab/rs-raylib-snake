@@ -1,21 +1,20 @@
 use std::ffi::{c_char, c_int, CString};
 
-#[allow(warnings)]
+#[allow(warnings, unused, clippy::approx_constant)]
 mod ffi {
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 }
 
 pub use ffi::Color;
 
-// Could use https://crates.io/crates/raylib instead.
 mod api {
     use super::*;
 
     pub fn init_window(width: i32, height: i32, title: &str) {
         unsafe {
             ffi::InitWindow(
-                width as c_int,
-                height as c_int,
+                width,
+                height,
                 CString::new(title).unwrap().as_ptr() as *const c_char,
             );
         }
@@ -47,25 +46,13 @@ mod api {
 
     pub fn draw_rectangle(x: i32, y: i32, width: i32, height: i32, color: Color) {
         unsafe {
-            ffi::DrawRectangle(
-                x as c_int,
-                y as c_int,
-                width as c_int,
-                height as c_int,
-                color,
-            );
+            ffi::DrawRectangle(x, y, width, height, color);
         }
     }
 
     pub fn draw_rectangle_lines(x: i32, y: i32, width: i32, height: i32, color: Color) {
         unsafe {
-            ffi::DrawRectangleLines(
-                x as c_int,
-                y as c_int,
-                width as c_int,
-                height as c_int,
-                color,
-            );
+            ffi::DrawRectangleLines(x, y, width, height, color);
         }
     }
 
@@ -73,9 +60,9 @@ mod api {
         unsafe {
             ffi::DrawText(
                 CString::new(text).unwrap().as_ptr() as *const c_char,
-                x as c_int,
-                y as c_int,
-                font_size as c_int,
+                x,
+                y,
+                font_size,
                 color,
             );
         }
@@ -116,7 +103,7 @@ mod api {
         unsafe {
             ffi::MeasureText(
                 CString::new(text).unwrap().as_ptr() as *const c_char,
-                font_size as c_int,
+                font_size,
             )
         }
     }

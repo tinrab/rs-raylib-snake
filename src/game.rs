@@ -47,7 +47,6 @@ impl Game {
         }
 
         if Input::is_key_down(KeyboardKey::KeyUp) && self.direction != Direction::Down {
-            println!("UP");
             self.direction = Direction::Up;
         }
         if Input::is_key_down(KeyboardKey::KeyDown) && self.direction != Direction::Up {

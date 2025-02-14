@@ -4,6 +4,7 @@ const RAYLIB_DIR: &str = "raylib";
 const RAYLIB_OUT_DIR: &str = "raylib/zig-out";
 
 fn main() -> Result<(), Box<dyn Error>> {
+    // Run `zig build`
     let _ = Command::new("zig")
         .arg("build")
         .current_dir(RAYLIB_DIR)
@@ -27,6 +28,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         bindings.write_to_file(out_path.join("bindings.rs"))?;
     }
 
+    // Link to the library
     println!("cargo:rustc-link-search=native={RAYLIB_OUT_DIR}/lib");
     println!("cargo:rustc-link-lib=static=raylib");
 
